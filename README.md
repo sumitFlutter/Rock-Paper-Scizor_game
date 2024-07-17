@@ -1,16 +1,8 @@
 # rock_paper_scizors
 
-A new Flutter project.
+Embark on a thrilling journey of strategy and quick thinking with the Rock Paper Scissors game crafted by Sumit Gohil. Fluttering with sleek animations and powered by intuitive controls, this game pits you against a cunning AI opponent. Keep track of your victories, defeats, and draws with seamless local data storage using shared preferences. Challenge yourself to reach new heights in this timeless game of wits, where every match is a chance to sharpen your skills and emerge victorious. Download now and experience the excitement – the ultimate classic awaits at your fingertips!
 
-## Getting Started
+For more details and updates, you can visit Sumit Gohil's GitHub profile at sumitFlutter.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
