@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:rock_paper_scizors/utils/shared_helper.dart';
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage(
       {super.key,
@@ -30,17 +28,6 @@ class _MyHomePageState extends State<MyHomePage> {
   int loss = 0;
   int total = 0;
   int draw = 0;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    win = widget.winner;
-    loss = widget.lossA;
-    total = widget.totalA;
-    draw = widget.drawA;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -138,9 +125,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 10,
               ),
               Container(
-                width: MediaQuery.sizeOf(context).width * 0.40,
+                width: MediaQuery.sizeOf(context).width * 0.45,
                 padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.2 ),
+                decoration: BoxDecoration(color: Colors.white.withOpacity(0.3),
                     border: Border.all(
                   color: Colors.white,
                   width: 1,
@@ -157,18 +144,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         TextButton.icon(
                           onPressed: () {
-                            setState(() async {
-                              await SharedHelper.sharedHelper.setWinScore(0);
-                              await SharedHelper.sharedHelper.setLossScore(0);
-                              await SharedHelper.sharedHelper.setTotalScore(0);
-                              await SharedHelper.sharedHelper.setDraw(0);
-                              total = await SharedHelper.sharedHelper
-                                  .getTotalScore();
-                              draw = await SharedHelper.sharedHelper.getDraw();
-                              win =
-                                  await SharedHelper.sharedHelper.getWinScore();
-                              loss = await SharedHelper.sharedHelper
-                                  .getLossScore();
+                            setState(() {
+                              total=0;
+                              win=0;
+                              loss=0;
+                              draw=0;
                             });
                           },
                           label: const Text("Reset"),
@@ -179,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     const SizedBox(
                       height: 2,
                     ),
-                    const Divider(),
+                    const Divider(color: Colors.white,),
                     const SizedBox(
                       height: 2,
                     ),
@@ -244,35 +224,27 @@ class _MyHomePageState extends State<MyHomePage> {
     players = "assets/image/$player.png";
     bots = "assets/image/00$bot.png";
     if (bot == player) {
+      draw++;
       winner = "It's DRAW";
-      await SharedHelper.sharedHelper.setDraw(draw++);
-      draw = await SharedHelper.sharedHelper.getDraw();
     } else if (bot == 0 && player == 1) {
       winner = "You Win";
-      await SharedHelper.sharedHelper.setWinScore(win++);
-      win = await SharedHelper.sharedHelper.getWinScore();
+      win++;
     } else if (bot == 1 && player == 0) {
-      await SharedHelper.sharedHelper.setLossScore(loss++);
-      loss = await SharedHelper.sharedHelper.getLossScore();
+      loss++;
       winner = "You Lost";
     } else if (bot == 0 && player == 2) {
-      await SharedHelper.sharedHelper.setLossScore(loss++);
-      loss = await SharedHelper.sharedHelper.getLossScore();
-      winner = "You Lost";
+      loss++;
+            winner = "You Lost";
     } else if (bot == 2 && player == 0) {
+      win++;
       winner = "You Win";
-      await SharedHelper.sharedHelper.setWinScore(win++);
-      win = await SharedHelper.sharedHelper.getWinScore();
     } else if (bot == 1 && player == 2) {
+      win++;
       winner = "You Win";
-      await SharedHelper.sharedHelper.setWinScore(win++);
-      win = await SharedHelper.sharedHelper.getWinScore();
-    } else if (bot == 2 && player == 1) {
-      await SharedHelper.sharedHelper.setLossScore(loss++);
-      loss = await SharedHelper.sharedHelper.getLossScore();
+          } else if (bot == 2 && player == 1) {
+      loss++;
       winner = "You Lost";
     }
-    await SharedHelper.sharedHelper.setTotalScore(total++);
-    total = await SharedHelper.sharedHelper.getTotalScore();
+    total++;
   }
 }

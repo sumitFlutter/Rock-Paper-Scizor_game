@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rock_paper_scizors/screen/home/home_screen.dart';
-import 'package:rock_paper_scizors/utils/shared_helper.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -24,7 +22,6 @@ class _MyAppState extends State<MyApp> {
   void initState() async {
     // TODO: implement initState
     super.initState();
-    getShr();
   }
   @override
   Widget build(BuildContext context) {
@@ -34,13 +31,6 @@ class _MyAppState extends State<MyApp> {
       title: 'Rock Paper Scissors Game',
       home: MyHomePage(title: 'Rock Paper Scissors Game',lossA: lossS,totalA: totalS,winner: winS,drawA: drawS,),
     );
-  }
-  void getShr()
-  async {
-        winS=(await SharedHelper.sharedHelper.getWinScore());
-        lossS=(await SharedHelper.sharedHelper.getLossScore());
-        totalS=(await SharedHelper.sharedHelper.getTotalScore());
-        drawS=await SharedHelper.sharedHelper.getDraw();
   }
 }
 
