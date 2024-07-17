@@ -34,11 +34,11 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
 
-              Image.asset(bots,height:bots!="assets/image/00.png"? 200:179,width: bots!="assets/image/00.png"?200:80,fit: BoxFit.cover,),
+              Image.asset(bots,height:bots!="assets/image/00.png"? 200:179,width: bots!="assets/image/00.png"?200:250,fit: BoxFit.cover,),
               const SizedBox(height: 5,),
               Text(winner,style: const TextStyle(fontWeight: FontWeight.bold),),
               const SizedBox(height: 5,),
-              Image.asset(players,height: players!="assets/image/01.png"?200:118,width: players!="assets/image/01.png"?200:41,fit: BoxFit.cover,),
+              Image.asset(players,height: players!="assets/image/01.png"?200:118,width: players!="assets/image/01.png"?200:250,fit: BoxFit.cover,),
               const SizedBox(height: 16,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
