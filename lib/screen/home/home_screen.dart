@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 width: MediaQuery.sizeOf(context).width * 0.45,
                 padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.3),
+                decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3),
                     border: Border.all(
                   color: Colors.white,
                   width: 1,
@@ -149,6 +149,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               win=0;
                               loss=0;
                               draw=0;
+                              winner="";
+                              players = "assets/image/01.png";
+                              bots = "assets/image/00.png";
                             });
                           },
                           label: const Text("Reset"),
