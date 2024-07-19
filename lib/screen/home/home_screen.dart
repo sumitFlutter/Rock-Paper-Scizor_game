@@ -30,15 +30,26 @@ class _MyHomePageState extends State<MyHomePage> {
   int draw = 0;
   @override
   Widget build(BuildContext context) {
+
+// The equivalent of the "smallestWidth" qualifier on Android.
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+
+// Determine if we should use mobile layout or not, 600 here is
+// a common breakpoint for a typical 7-inch tablet.
+    final bool useMobileLayout = shortestSide < 600;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey.shade900,
+        surfaceTintColor: Colors.blueGrey.shade900,
         title: Text(widget.title),
       ),
       body: SizedBox(
         height: MediaQuery.sizeOf(context).height,
         width: MediaQuery.sizeOf(context).width,
         child: Center(
-          child: Column(
+          child: useMobileLayout?SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -125,13 +136,191 @@ class _MyHomePageState extends State<MyHomePage> {
                 height: 10,
               ),
               Container(
-                width: MediaQuery.sizeOf(context).width * 0.45,
+                width: useMobileLayout==false?MediaQuery.sizeOf(context).width * 0.45:MediaQuery.sizeOf(context).width*0.7,
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3),
                     border: Border.all(
-                  color: Colors.white,
-                  width: 1,
-                )),
+                      color: Colors.white,
+                      width: 1,
+                    )),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Total Score:-",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              total=0;
+                              win=0;
+                              loss=0;
+                              draw=0;
+                              winner="";
+                              players = "assets/image/01.png";
+                              bots = "assets/image/00.png";
+                            });
+                          },
+                          label: const Text("Reset"),
+                          icon: const Icon(Icons.refresh),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    const Divider(color: Colors.white,),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Total Winning Match:"),
+                          Text(
+                            win.toString(),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ]),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Total Loosing Match:"),
+                          Text(
+                            loss.toString(),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ]),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Total Draw in Match:"),
+                          Text(
+                            draw.toString(),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ]),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text("Total Match:"),
+                          Text(
+                            total.toString(),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ])
+                  ],
+                ),
+              )
+            ],
+          ),):
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                bots,
+                height: bots != "assets/image/00.png" ? 200 : 179,
+                width: bots != "assets/image/00.png" ? 200 : 250,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                winner,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Image.asset(
+                players,
+                height: players != "assets/image/01.png" ? 200 : 118,
+                width: players != "assets/image/01.png" ? 200 : 250,
+                fit: BoxFit.cover,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          winner = "";
+                          player = 0;
+                          checkWinner();
+                        });
+                      },
+                      icon: Image.asset(
+                        "assets/image/icon1.png",
+                        height: 52,
+                        width: 52,
+                        fit: BoxFit.cover,
+                      )),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          winner = "";
+                          player = 1;
+                          checkWinner();
+                        });
+                      },
+                      icon: Image.asset(
+                        "assets/image/icon2.png",
+                        height: 52,
+                        width: 52,
+                        fit: BoxFit.cover,
+                      )),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        setState(() {
+                          winner = "";
+                          player = 2;
+                          checkWinner();
+                        });
+                      },
+                      icon: Image.asset(
+                        "assets/image/icon3.png",
+                        height: 52,
+                        width: 52,
+                        fit: BoxFit.cover,
+                      )),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: useMobileLayout==false?MediaQuery.sizeOf(context).width * 0.45:MediaQuery.sizeOf(context).width*0.7,
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 1,
+                    )),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
