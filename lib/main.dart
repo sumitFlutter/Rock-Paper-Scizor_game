@@ -18,12 +18,7 @@ class _MyAppState extends State<MyApp> {
   int lossS=0;
   int totalS=0;
   int drawS=0;
-  @override
-  void initState() async {
-    // TODO: implement initState
-    super.initState();
-  }
-  @override
+    @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
